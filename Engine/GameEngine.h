@@ -8,6 +8,8 @@ public:
 	AddSprite();
 	RemoveSprite();
 	Run();
+
+	// en testkommentar
 };
 
 #endif
