@@ -1,15 +1,20 @@
 #include "GameObject.h"
-#include <SDL.h>
+#include "System.h"
 
-namespace engine {
 
-	GameObject::GameObject(const SDL_Rect& r) :rect(r)
+namespace lazyEngine {
+
+	GameObject::GameObject(const SDL_Rect& r) : rect(r)
 	{
 	}
+
+
+
 
 
 	GameObject::~GameObject()
 	{
 	}
-
 }
+
+

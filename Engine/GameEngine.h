@@ -1,30 +1,26 @@
 #ifndef GAMEENGINE_H
 #define GAMEENGINE_H
 
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include "GameObject.h"
+#include <vector>
 
-namespace engine {
+namespace lazyEngine {
+
 	class GameEngine
 	{
 	public:
 		GameEngine();
-		SDL_Renderer* getRen() { return ren; }
-		TTF_Font* getFont() { return font; }
 		~GameEngine();
-		/*AddSprite();
-		RemoveSprite();
-		Run();*/
+		void add(GameObject*);
+		void remove(GameObject*);
+		void run();
+
+
+
 	private:
-		SDL_Window* win;
-		SDL_Renderer* ren;
-		TTF_Font* font;
+		std::vector<GameObject*> gameObjectVector;
 
-
-		// en testkommentar
 	};
 
-	extern GameEngine eng;
 }
-
 #endif

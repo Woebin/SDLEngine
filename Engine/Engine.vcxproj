@@ -19,20 +19,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="GameEngine.h" />
-    <ClInclude Include="ImmobileObject.h" />
-    <ClInclude Include="MobileObject.h" />
+    <ClInclude Include="Immovable.h" />
+    <ClInclude Include="Movable.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="System.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="GameEngine.cpp" />
-    <ClCompile Include="ImmobileObject.cpp" />
-    <ClCompile Include="MobileObject.cpp" />
+    <ClCompile Include="Immovable.cpp" />
+    <ClCompile Include="Movable.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="System.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{14b9bb3b-1aa2-478b-964f-f7999f002a6a}</ProjectGuid>
