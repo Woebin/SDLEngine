@@ -2,12 +2,12 @@
 #include <SDL.h>
 #include "System.h"
 #include "GameObject.h"
+#include <vector>
 
 namespace lazyEngine {
 
-	GameEngine::GameEngine()
-	{
-
+	GameEngine::GameEngine() {
+		System sys;
 	}
 
 
@@ -22,7 +22,7 @@ namespace lazyEngine {
 				delete o;
 				break;
 				// when deleting from a vector will there be a hole?
-				// do we need to swap paces or fill the hole?
+				// do we need to swap places or fill the hole?
 			}
 
 		}
@@ -86,8 +86,8 @@ namespace lazyEngine {
 
 	GameEngine::~GameEngine()
 	{
-		for (GameObject* g : gameObjectVector)
-			delete g;
+		gameObjectVector.clear();
+		gameObjectVector.resize(0);
 	}
 
 

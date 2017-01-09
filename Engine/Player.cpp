@@ -15,7 +15,7 @@ namespace lazyEngine {
 
 		SDL_Surface* surface = IMG_Load("img/robojerk.png");
 		if (surface == nullptr) {
-			cerr << "Bild hittas inte!" << endl;
+			cerr << "No image found." << endl;
 
 		}
 
