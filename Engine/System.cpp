@@ -15,6 +15,11 @@ namespace lazyEngine {
 	}
 
 
+	SDL_Point System::getTarget()
+	{
+		return target;
+	}
+
 	System::~System()
 	{
 		TTF_CloseFont(font);
@@ -22,6 +27,11 @@ namespace lazyEngine {
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyWindow(win);
 		SDL_Quit();
+	}
+
+	void System::setTarget(SDL_Point p)
+	{
+		target = p;
 	}
 
 	System sys;

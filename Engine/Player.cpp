@@ -57,13 +57,23 @@ namespace lazyEngine {
 
 	}
 
+	SDL_Point Player::getPos() {
+		SDL_Rect temp = getRect();
+		SDL_Point p = { temp.x, temp.y };
+		return p;
+	}
+
 
 
 
 	Player::~Player()
 	{
-
 		SDL_DestroyTexture(getTexture());
+	}
+
+	void Player::tick()
+	{
+		sys.setTarget(getPos());
 	}
 
 }
