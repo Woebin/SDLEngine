@@ -16,7 +16,7 @@ namespace lazyEngine {
 		void add(GameObject*);
 		void remove(GameObject*);
 		// void spawnEnemy(timeHowOften, bredd och höjd den kan spawna på(över hela banan exempelvis)
-		void spawnEnemy(SDL_Rect spawn_area, int speed);
+		void spawnEnemy();
 
 		bool checkCollision(SDL_Rect A, SDL_Rect B);
 		void run();
