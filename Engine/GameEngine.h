@@ -13,6 +13,7 @@ namespace lazyEngine {
 		~GameEngine();
 		void add(GameObject*);
 		void remove(GameObject*);
+		bool checkCollision(SDL_Rect a, SDL_Rect b);
 		void run();
 
 
