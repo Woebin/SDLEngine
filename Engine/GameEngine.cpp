@@ -24,7 +24,7 @@ namespace lazyEngine {
 			if (c == o) {
 				// delete o;    this one would break the whole program, never use delete this way
 				break;
-				
+
 			}
 
 		}
@@ -106,7 +106,7 @@ namespace lazyEngine {
 	}
 
 
-	const int TIMEPERLOOP = 1000 / 60;
+	const int TIMEPERLOOP = 1000 / 30;
 	void GameEngine::run() {
 		bool goOn = true;
 		while (goOn) {
@@ -149,8 +149,9 @@ namespace lazyEngine {
 
 			for (GameObject* c : gameObjectVector) {
 				c->tick();
-				
+
 				c->draw();
+
 
 				if (Player* player = dynamic_cast<Player*>(c)) {  // if1
 					for (GameObject* other : gameObjectVector) {  // for
@@ -158,8 +159,7 @@ namespace lazyEngine {
 							if (checkCollision(player->getRect(), enemy->getRect())) {  // if3
 								// player dies
 								// cue music
-
-								SDL_Quit(); // för tillfället, stäng ner programmet
+								enemy->die();
 
 							} // if3
 						} // if2  -- collectebles?

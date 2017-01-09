@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
 	GameEngine ge;
 	SDL_Rect rp = { 200,200,39,39 };
 	SDL_Rect rb = { 0,0,640,480 };
-	SDL_Rect re = { 320,0,64,64 };
+	SDL_Rect re = { 200,0,64,64 };
 	Player p(rp, 5);
 	Enemy e1(re, 2);
 	Background bg(rb);

@@ -19,6 +19,7 @@ namespace lazyEngine {
 		void keyUp(const SDL_Event& eve);
 		void animate();
 		void stop();
+		void die();
 		~Player();
 
 		void tick();

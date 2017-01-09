@@ -30,13 +30,14 @@ namespace lazyEngine {
 
 		int rCount;
 		int lCount;
-		int rSpriteW;
-		int rSpriteH;
-		int lSpriteW;
-		int lSpriteH;
+		int rSpriteX;
+		int rSpriteY;
+		int lSpriteX;
+		int lSpriteY;
 		bool facingRight;
-		int sw;
-		int sh;
+		int spriteWidth;
+		int spriteHeight;
+		bool destroyed;
 	private:
 
 

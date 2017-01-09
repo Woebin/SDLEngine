@@ -12,16 +12,26 @@ namespace lazyEngine {
 	Enemy::Enemy(const SDL_Rect& r, int s) : Movable(r, s)
 	{
 		rCount = 0;
-		rSpriteW = 0;
-		rSpriteH = 384;
-		sw = 64;
-		sh = 64;
-		SDL_Surface* surface = IMG_Load("img/fireball.png");
-		if (surface == nullptr) {
+		lCount = 0;
+		rSpriteX = 0;
+		rSpriteY = 384;
+		spriteWidth = 64;
+		spriteHeight = 64;
+		destroyed = false;
+
+		SDL_Surface* surface1 = IMG_Load("img/fireball.png");
+		if (surface1 == nullptr) {
 			cerr << "No image found." << endl;
 		}
-		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface);
-		SDL_FreeSurface(surface);
+		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1);
+		SDL_FreeSurface(surface1);
+
+		SDL_Surface* surface2 = IMG_Load("img/explosion.png");
+		if (surface2 == nullptr) {
+			cerr << "No image found." << endl;
+		}
+		spriteSheet2 = SDL_CreateTextureFromSurface(sys.getRen(), surface2);
+		SDL_FreeSurface(surface2);
 	}
 
 	void Enemy::tick()
@@ -31,31 +41,61 @@ namespace lazyEngine {
 		//if (getRect().y < 480) {
 		//	
 		//}
-		move(0, speed);
 		animate();
+		move(0, speed);
 
 		// nu åker eldkloten neråt i jämn hastighet
 	}
 
 	void Enemy::animate() {
-		rCount++;
-		if (rCount < 8) {
-			rSpriteW += sw;
+		if (!destroyed) {
+			rCount++;
+			if (rCount < 8) {
+				rSpriteX += spriteWidth;
+			}
+			else {
+				rCount = 0;
+				rSpriteX = 0;
+			}
 		}
 		else {
-			rCount = 0;
-			rSpriteW = 0;
+			lCount++;
+			if (lCount < 5) {
+				rSpriteX += spriteWidth;
+			}
+			else if (lCount < 6 && rSpriteY < 256) {
+				lCount = 0;
+				rSpriteX = 0;
+				rSpriteY += spriteHeight;
+			}
+			else {
+				lCount = 0;
+				rSpriteX = 0;
+				rSpriteY = 0;
+			}
 		}
 	}
 
+	void Enemy::die() {
+		destroyed = true;
+		speed = 0;
+	}
+
 	void Enemy::draw() {
-		SDL_Rect rp = { rSpriteW,rSpriteH,sw,sh };
+		if (!destroyed){
+		SDL_Rect rp = { rSpriteX,rSpriteY,spriteWidth,spriteHeight };
 		SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
+		}
+		else {
+			SDL_Rect rp = { rSpriteX,rSpriteY,spriteWidth,spriteHeight };
+			SDL_RenderCopy(sys.getRen(), getSheet2(), &rp, &getRect());
+		}
 	}
 
 
 	Enemy::~Enemy()
 	{
 		SDL_DestroyTexture(getSheet1());
+		SDL_DestroyTexture(getSheet2());
 	}
 }
