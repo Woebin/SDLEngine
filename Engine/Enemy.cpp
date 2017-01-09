@@ -11,19 +11,16 @@ namespace lazyEngine {
 
 	Enemy::Enemy(const SDL_Rect& r, int s) : Movable(r, s)
 	{
-		SDL_Surface* surface = IMG_Load("img/fireball.png");
-		if (surface == nullptr) {
-			cerr << "No image found." << endl;
-
-		}
-
 		rCount = 0;
 		rSpriteW = 0;
 		rSpriteH = 384;
 		sw = 64;
 		sh = 64;
+		SDL_Surface* surface = IMG_Load("img/fireball.png");
+		if (surface == nullptr) {
+			cerr << "No image found." << endl;
+		}
 		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface);
-
 		SDL_FreeSurface(surface);
 	}
 
@@ -34,8 +31,8 @@ namespace lazyEngine {
 		//if (getRect().y < 480) {
 		//	
 		//}
+		move(0, speed);
 		animate();
-		move(0, -5);
 
 		// nu åker eldkloten neråt i jämn hastighet
 	}

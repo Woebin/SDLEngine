@@ -37,10 +37,11 @@ namespace lazyEngine {
 	}
 
 
-
+	const int TIMEPERLOOP = 1000 / 60;
 	void GameEngine::run() {
 		bool goOn = true;
 		while (goOn) {
+			Uint32 nextTick = SDL_GetTicks() + TIMEPERLOOP;
 			SDL_Event eve;
 			while (SDL_PollEvent(&eve)) {
 				switch (eve.type) {
@@ -76,6 +77,11 @@ namespace lazyEngine {
 			}
 
 			SDL_RenderPresent(sys.getRen());
+
+			int delay = nextTick - SDL_GetTicks();
+			if (delay > 0) {
+				SDL_Delay(delay);
+			}
 		} // outer while
 	}
 

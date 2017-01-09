@@ -22,10 +22,8 @@ namespace lazyEngine {
 		rSpriteW = 0;
 		rSpriteH = 0;
 		rCount = 0;
-
 		lSpriteW = 266;
 		lCount = 0;
-
 		facingRight = true;
 
 		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1);
