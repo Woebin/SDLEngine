@@ -1,8 +1,11 @@
 #include "Source.h"
 #include "GameEngine.h"
+using namespace lazyEngine;
 
 
 int main(int argc, char** argv) {
+	GameEngine ge;
+	SDL_Rect r = { 200,200,	}
 	//Frame frame;
 	/*Label* lab = Label::getInstance({ 250,100,100,100 }, "0");
 	frame.add(lab);

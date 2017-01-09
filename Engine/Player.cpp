@@ -2,6 +2,8 @@
 #include "Player.h"
 
 #include "System.h"
+#include <SDL_ttf.h>
+#include <SDL_image.h>
 #include <iostream>
 using namespace std;
 
@@ -11,7 +13,7 @@ namespace lazyEngine {
 	{
 
 
-		SDL_Surface* surface = SDL_LoadBMP("c:/images/gubbe.bmp");
+		SDL_Surface* surface = IMG_Load("img/robojerk.png");
 		if (surface == nullptr) {
 			cerr << "Bild hittas inte!" << endl;
 
