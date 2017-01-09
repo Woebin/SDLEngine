@@ -27,7 +27,7 @@ namespace lazyEngine {
 	}
 
 
-	Background::~Backround()
+	Background::~Background()
 	{
 	}
 }

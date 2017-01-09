@@ -11,7 +11,6 @@ namespace lazyEngine {
 		Background(const SDL_Rect& r);
 		void draw();
 
-
 		~Background();
 	};
 }
