@@ -28,6 +28,7 @@ namespace lazyEngine {
 		// const
 		SDL_Texture* texture;
 		SDL_Rect rect;
+		SDL_Texture* getTexture() const { return texture; }
 		
 
 	private:
