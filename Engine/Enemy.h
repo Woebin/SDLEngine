@@ -9,6 +9,8 @@ namespace lazyEngine {
 		Enemy(const SDL_Rect & r, int s);
 		void tick();
 		~Enemy();
+	
+
 	};
 
 }

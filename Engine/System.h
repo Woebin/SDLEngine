@@ -12,6 +12,9 @@ namespace lazyEngine {
 		TTF_Font* getFont() { return font; }
 		SDL_Point getTarget();
 		void setTarget(SDL_Point p);
+
+
+
 		~System();
 	private:
 		SDL_Window* win;
