@@ -3,6 +3,8 @@
 #include "System.h"
 #include "GameObject.h"
 #include <vector>
+#include "Player.h"
+#include "Enemy.h"
 
 namespace lazyEngine {
 
@@ -18,10 +20,9 @@ namespace lazyEngine {
 	void GameEngine::remove(GameObject* o) {
 		for (auto c : gameObjectVector) {
 			if (c == o) {
-				delete o;
+				// delete o;    this one would break the whole program, never use delete this way
 				break;
-				// when deleting from a vector will there be a hole?
-				// do we need to swap places or fill the hole?
+				
 			}
 
 		}
@@ -36,7 +37,7 @@ namespace lazyEngine {
 
 	}
 
-	bool check_collision(SDL_Rect A, SDL_Rect B)
+	bool GameEngine::checkCollision(SDL_Rect A, SDL_Rect B)
 	{
 		//The sides of the rectangles
 		int leftA, leftB;
@@ -115,11 +116,23 @@ namespace lazyEngine {
 			SDL_RenderClear(sys.getRen());
 			for (GameObject* c : gameObjectVector) {
 				c->tick();
-				// tick() ska vara en funktion som anropas efter varje speloop, den kanske flyttar en fiende �t h�ger
-				// �kar ett v�rde p� en klocka, k�r en soundbite utifr�n hur l�ng tid som g�tt i spelet. man 
-				// uppdaterar till exeempel koordinaterna p� en sprite innan den ritas ut
+				
 				c->draw();
-			}
+
+				if (Player* player = dynamic_cast<Player*>(c)) {  // if1
+					for (GameObject* other : gameObjectVector) {  // for
+						if (Enemy* enemy = dynamic_cast<Enemy*>(other)) {  // if2
+							if (checkCollision(player->getRect(), enemy->getRect())) {  // if3
+								// player dies
+								// cue music
+
+								SDL_Quit(); // för tillfället, stäng ner programmet
+
+							} // if3
+						} // if2  -- collectebles?
+					} // for
+				} // if1
+			} // original for-loop
 
 			SDL_RenderPresent(sys.getRen());
 
