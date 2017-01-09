@@ -11,7 +11,7 @@ namespace lazyEngine {
 
 	Player::Player(const SDL_Rect& r, int s) : Movable(r, s)
 	{
-		SDL_Surface* surface1 = IMG_Load("img/robojerkFull.png");
+		SDL_Surface* surface1 = IMG_Load("img/robojerk.png");
 		if (surface1 == nullptr) {
 			cerr << "No image found." << endl;
 
@@ -30,16 +30,16 @@ namespace lazyEngine {
 
 		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1);
 
-		//SDL_FreeSurface(surface1);
-		//SDL_Surface* surface2 = IMG_Load("img/robojerkreverse.png");
-		//if (surface2 == nullptr) {
-		//	cerr << "No image found." << endl;
+		SDL_FreeSurface(surface1);
+		SDL_Surface* surface2 = IMG_Load("img/robojerkreverse.png");
+		if (surface2 == nullptr) {
+			cerr << "No image found." << endl;
 
-		//}
+		}
 
-		//spriteSheet2 = SDL_CreateTextureFromSurface(sys.getRen(), surface2);
+		spriteSheet2 = SDL_CreateTextureFromSurface(sys.getRen(), surface2);
 
-		//SDL_FreeSurface(surface2);
+		SDL_FreeSurface(surface2);
 
 	}
 
@@ -111,14 +111,14 @@ namespace lazyEngine {
 	}
 
 	void Player::draw() {
-		//if (facingRight) {
+		if (facingRight) {
 			SDL_Rect rp = { rSpriteX,0,spriteWidth,spriteHeight };
 			SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
-		//}
-		//else {
-		//	SDL_Rect rp = { lSpriteW,0,spriteWidth,spriteHeight };
-		//	SDL_RenderCopy(sys.getRen(), getSheet2(), &rp, &getRect());
-		//}
+		}
+		else {
+			SDL_Rect rp = { lSpriteX,0,spriteWidth,spriteHeight };
+			SDL_RenderCopy(sys.getRen(), getSheet2(), &rp, &getRect());
+		}
 		// NULL kan bytas ut mot vilken del av bilden som skall ritas ut
 
 	}
@@ -135,7 +135,7 @@ namespace lazyEngine {
 	Player::~Player()
 	{
 		SDL_DestroyTexture(getSheet1());
-		//SDL_DestroyTexture(getSheet2());
+		SDL_DestroyTexture(getSheet2());
 	}
 
 	void Player::tick()

@@ -39,25 +39,25 @@ namespace lazyEngine {
 
 	}
 
-	void GameEngine::spawnEnemy()
-	{
+	//void GameEngine::spawnEnemy()
+	//{
 
-		static int count;
+	//	static int count;
 
-		count++;
+	//	count++;
 
-		if (count > 500) {
-			srand((unsigned)time(0));
-			int x = (rand() % sys.SCREEN_WIDTH) + 1;
+	//	if (count > 500) {
+	//		srand((unsigned)time(0));
+	//		int x = (rand() % sys.SCREEN_WIDTH) + 1;
 
-			SDL_Rect r = { x, sys.SCREEN_HEIGHT, 64, 64 };
-			Enemy enemy(r, 2); // kan succesivt öka speed om vi vill
-			gameObjectVector.push_back(&enemy);
+	//		SDL_Rect r = { x, sys.SCREEN_HEIGHT, 64, 64 };
+	//		Enemy enemy(r, 2); // kan succesivt öka speed om vi vill
+	//		gameObjectVector.push_back(&enemy);
 
-			count = 0;
-		}
-		
-	}
+	//		count = 0;
+	//	}
+	//	
+	//}
 
 
 
@@ -149,7 +149,7 @@ namespace lazyEngine {
 			SDL_RenderClear(sys.getRen());
 
 			// spawnEnemies
-			spawnEnemy();
+			//spawnEnemy();
 
 			for (GameObject* c : gameObjectVector) {
 				c->tick();
