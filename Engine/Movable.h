@@ -14,6 +14,7 @@ namespace lazyEngine {
 
 
 		void move(int xx, int yy);
+		virtual void animate() = 0;
 
 	protected:
 		Movable(const SDL_Rect& r, int s);
@@ -26,6 +27,16 @@ namespace lazyEngine {
 		int speed;
 		// Movable::Movable(const SDL_Rect& r, int s): GameObject(r), speed(s)
 		// om man ska best�mma farten n�r man skapat objektet
+
+		int rCount;
+		int lCount;
+		int rSpriteW;
+		int rSpriteH;
+		int lSpriteW;
+		int lSpriteH;
+		bool facingRight;
+		int sw;
+		int sh;
 	private:
 
 

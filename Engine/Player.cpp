@@ -8,16 +8,6 @@
 using namespace std;
 
 namespace lazyEngine {
-	int sw = 38;
-	int sh = 38;
-	int rwTest = 0;
-	int hTest = 0;
-	int rCount = 0;
-
-	int lwTest = 266;
-	int lCount = 8;
-
-	bool facingRight = true;
 
 	Player::Player(const SDL_Rect& r, int s) : Movable(r, s)
 	{
@@ -26,6 +16,17 @@ namespace lazyEngine {
 			cerr << "No image found." << endl;
 
 		}
+
+		sw = 38;
+		sh = 38;
+		rSpriteW = 0;
+		rSpriteH = 0;
+		rCount = 0;
+
+		lSpriteW = 266;
+		lCount = 0;
+
+		facingRight = true;
 
 		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1);
 
@@ -79,20 +80,20 @@ namespace lazyEngine {
 		if (facingRight) {
 			rCount++;
 			if (rCount < 7) {
-				rwTest += sw;
+				rSpriteW += sw;
 			}
 			else {
 				rCount = 1;
-				rwTest = 38;
+				rSpriteW = 38;
 			}
 		}
 		else {
 			lCount++;
 			if (lCount < 7)
-				lwTest -= sw;
+				lSpriteW -= sw;
 			else {
 				lCount = 1;
-				lwTest = 228;
+				lSpriteW = 228;
 			}
 		}
 	}
@@ -100,19 +101,19 @@ namespace lazyEngine {
 	void Player::stop() {
 		rCount = 0;
 		lCount = 0;
-		rwTest = 0;
-		lwTest = 266;
-		hTest = 0;
+		rSpriteW = 0;
+		lSpriteW = 266;
+		rSpriteH = 0;
 	}
 
 
 	void Player::draw() {
 		if (facingRight) {
-			SDL_Rect rp = { rwTest,0,sw,sh };
+			SDL_Rect rp = { rSpriteW,0,sw,sh };
 			SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
 		}
 		else {
-			SDL_Rect rp = { lwTest,0,sw,sh };
+			SDL_Rect rp = { lSpriteW,0,sw,sh };
 			SDL_RenderCopy(sys.getRen(), getSheet2(), &rp, &getRect());
 		}
 		// NULL kan bytas ut mot vilken del av bilden som skall ritas ut

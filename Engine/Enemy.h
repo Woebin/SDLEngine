@@ -8,6 +8,8 @@ namespace lazyEngine {
 	public:
 		Enemy(const SDL_Rect & r, int s);
 		void tick();
+		void animate();
+		void draw();
 		~Enemy();
 	
 

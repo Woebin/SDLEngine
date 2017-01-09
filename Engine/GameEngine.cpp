@@ -113,7 +113,7 @@ namespace lazyEngine {
 			SDL_SetRenderDrawColor(sys.getRen(), 255, 255, 255, 0);
 			SDL_RenderClear(sys.getRen());
 			for (GameObject* c : gameObjectVector) {
-				// c->tick()
+				c->tick();
 				// tick() ska vara en funktion som anropas efter varje speloop, den kanske flyttar en fiende �t h�ger
 				// �kar ett v�rde p� en klocka, k�r en soundbite utifr�n hur l�ng tid som g�tt i spelet. man 
 				// uppdaterar till exeempel koordinaterna p� en sprite innan den ritas ut
