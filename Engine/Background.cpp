@@ -1,12 +1,14 @@
 ﻿#include "Background.h"
 #include "System.h"
 #include <iostream>
+#include<SDL_image.h>
+
 using namespace std;
 namespace lazyEngine {
 
 	Background::Background(const SDL_Rect& r) : Immovable(r)
 	{
-		SDL_Surface* surface = SDL_LoadBMP("c:/images/gubbe.bmp");
+		SDL_Surface* surface = IMG_Load("img/bg.png");
 		if (surface == nullptr) {
 			cerr << "Bild hittas inte!" << endl;
 

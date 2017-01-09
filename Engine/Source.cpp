@@ -1,14 +1,19 @@
 #include "Source.h"
 #include "GameEngine.h"
 #include "Player.h"
+#include "Background.h"
 using namespace lazyEngine;
 
 
 int main(int argc, char** argv) {
 	GameEngine ge;
-	SDL_Rect r = { 200,200,39,39 };
-	Player p(r, 5);
+	SDL_Rect rp = { 200,200,39,39 };
+	SDL_Rect rb = { 0,0,640,480 };
+	Player p(rp, 5);
+	Background bg(rb);
+	ge.add(&bg);
 	ge.add(&p);
+	ge.run();
 
 	//Frame frame;
 	/*Label* lab = Label::getInstance({ 250,100,100,100 }, "0");

@@ -39,8 +39,8 @@ namespace lazyEngine {
 		switch (eve.key.keysym.sym) {
 		case SDLK_RIGHT: move(speed, 0); break;
 		case SDLK_LEFT: move(-speed, 0); break;
-		case SDLK_UP: move(0, speed); break;
-		case SDLK_DOWN: move(0, -speed); break;
+		case SDLK_UP: move(0, -speed); break;
+		case SDLK_DOWN: move(0, speed); break;
 		}
 	}
 
@@ -51,8 +51,8 @@ namespace lazyEngine {
 
 
 	void Player::draw() {
-
-		SDL_RenderCopy(sys.getRen(), getTexture(), NULL, &getRect());
+		SDL_Rect rp = { 0,0,39,39 };
+		SDL_RenderCopy(sys.getRen(), getTexture(), &rp, &getRect());
 		// NULL kan bytas ut mot vilken del av bilden som skall ritas ut
 
 	}

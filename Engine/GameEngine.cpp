@@ -7,7 +7,6 @@
 namespace lazyEngine {
 
 	GameEngine::GameEngine() {
-		System sys;
 	}
 
 
@@ -64,7 +63,7 @@ namespace lazyEngine {
 						c->keyUp(eve);
 					break;
 				} // switch
-			} // inre while
+			} // inner while
 
 			SDL_SetRenderDrawColor(sys.getRen(), 255, 255, 255, 0);
 			SDL_RenderClear(sys.getRen());
@@ -76,11 +75,8 @@ namespace lazyEngine {
 				c->draw();
 			}
 
-
-
-
 			SDL_RenderPresent(sys.getRen());
-		} // yttre while
+		} // outer while
 	}
 
 
