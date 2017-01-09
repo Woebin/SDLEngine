@@ -5,6 +5,8 @@
 #include <vector>
 #include "Player.h"
 #include "Enemy.h"
+#include <cstdlib> 
+#include <ctime> 
 
 namespace lazyEngine {
 
@@ -36,6 +38,27 @@ namespace lazyEngine {
 
 
 	}
+
+	void GameEngine::spawnEnemy(SDL_Rect spawn_area, int speed)
+	{
+
+
+		srand((unsigned)time(0));
+		int x = (rand() % spawn_area.w) + 1;
+		srand((unsigned)time(0));
+		int y = (rand() % spawn_area.h) + 1;
+		SDL_Rect r = { x, y, 64, 64 };
+		Enemy enemy(r, speed); // kan succesivt öka speed om vi vill
+		gameObjectVector.push_back(&enemy);
+	}
+
+
+
+
+
+
+
+
 
 	bool GameEngine::checkCollision(SDL_Rect A, SDL_Rect B)
 	{
@@ -112,8 +135,18 @@ namespace lazyEngine {
 				} // switch
 			} // inner while
 
+
+
+
 			SDL_SetRenderDrawColor(sys.getRen(), 255, 255, 255, 0);
 			SDL_RenderClear(sys.getRen());
+
+			// spawnEnemies
+			if (nextTick % spawnTime) {
+				SDL_Rect r = { 0, 0, 640, 480 };
+				spawnEnemy(r, 2);
+			}
+
 			for (GameObject* c : gameObjectVector) {
 				c->tick();
 				
