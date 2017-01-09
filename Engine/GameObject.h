@@ -18,6 +18,7 @@ namespace lazyEngine {
 		virtual void keyDown(const SDL_Event& eve) {}
 		virtual void keyUp(const SDL_Event& eve) {}
 		SDL_Rect getRect() const { return rect; }
+		virtual void tick() {}
 
 
 
