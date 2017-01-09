@@ -8,6 +8,7 @@ using namespace std;
 
 namespace lazyEngine {
 
+
 	Enemy::Enemy(const SDL_Rect& r, int s) : Movable(r, s)
 	{
 		SDL_Surface* surface = IMG_Load("img/fireball.png");
@@ -16,34 +17,48 @@ namespace lazyEngine {
 
 		}
 
-		texture = SDL_CreateTextureFromSurface(sys.getRen(), surface);
-		
+		rCount = 0;
+		rSpriteW = 0;
+		rSpriteH = 384;
+		sw = 64;
+		sh = 64;
+		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface);
+
 		SDL_FreeSurface(surface);
 	}
 
 	void Enemy::tick()
 	{
-
-		
 		// SDL_Point targetPos = sys.getTarget();
 		// attackera mot spelarens position, downwards
-		if (getRect().y < EDGE_OF_THE_SCREEN) {
-			delete this;
-		}
+		//if (getRect().y < 480) {
+		//	
+		//}
+		animate();
 		move(0, -5);
 
 		// nu åker eldkloten neråt i jämn hastighet
+	}
 
+	void Enemy::animate() {
+		rCount++;
+		if (rCount < 8) {
+			rSpriteW += sw;
+		}
+		else {
+			rCount = 0;
+			rSpriteW = 0;
+		}
+	}
 
-
+	void Enemy::draw() {
+		SDL_Rect rp = { rSpriteW,rSpriteH,sw,sh };
+		SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
 	}
 
 
 	Enemy::~Enemy()
 	{
-
-	
-
-		SDL_DestroyTexture(getTexture());
+		SDL_DestroyTexture(getSheet1());
 	}
 }

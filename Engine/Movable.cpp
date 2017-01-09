@@ -14,8 +14,6 @@ namespace lazyEngine {
 
 	}
 
-
-
 	Movable::~Movable()
 	{
 	}
