@@ -24,12 +24,11 @@ namespace lazyEngine {
 
 	protected:
 		GameObject(const SDL_Rect& r);
-		SDL_Texture* getSheet1() const { return spriteSheet1; }
-		SDL_Texture* getSheet2() const { return spriteSheet2; }
+		
 		// const
+		SDL_Texture* texture;
 		SDL_Rect rect;
-		SDL_Texture* spriteSheet1;
-		SDL_Texture* spriteSheet2;
+		
 
 	private:
 

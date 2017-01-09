@@ -18,7 +18,10 @@ namespace lazyEngine {
 	protected:
 		Movable(const SDL_Rect& r, int s);
 		// �kallar super i cpp
-
+		SDL_Texture* getSheet1() const { return spriteSheet1; }
+		SDL_Texture* getSheet2() const { return spriteSheet2; }
+		SDL_Texture* spriteSheet1;
+		SDL_Texture* spriteSheet2;
 
 		int speed;
 		// Movable::Movable(const SDL_Rect& r, int s): GameObject(r), speed(s)

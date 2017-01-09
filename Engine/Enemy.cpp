@@ -24,13 +24,14 @@ namespace lazyEngine {
 	void Enemy::tick()
 	{
 
-		
+		move(0, -5);
+
 		// SDL_Point targetPos = sys.getTarget();
 		// attackera mot spelarens position, downwards
-		if (getRect().y < EDGE_OF_THE_SCREEN) {
+		if (getRect().y < sys.SCREEN_HEIGHT) {
 			delete this;
 		}
-		move(0, -5);
+		
 
 		// nu åker eldkloten neråt i jämn hastighet
 

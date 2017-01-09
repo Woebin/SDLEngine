@@ -12,8 +12,8 @@ namespace lazyEngine {
 		TTF_Font* getFont() { return font; }
 		SDL_Point getTarget();
 		void setTarget(SDL_Point p);
-
-
+		static const int SCREEN_WIDTH = 640;
+		static const int SCREEN_HEIGHT = 480;
 
 		~System();
 	private:

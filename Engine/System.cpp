@@ -8,7 +8,8 @@ namespace lazyEngine {
 	System::System()
 	{
 		SDL_Init(SDL_INIT_EVERYTHING);
-		win = SDL_CreateWindow("Gmae", 100, 100, 640, 480, 0);
+		win = SDL_CreateWindow("Gmae", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, 0); // vill man ändra width och height kan man göra detta i
+																					// System.h
 		ren = SDL_CreateRenderer(win, -1, 0);
 		TTF_Init();
 		font = TTF_OpenFont("c:/Windows/Fonts/arial.ttf", 24);
