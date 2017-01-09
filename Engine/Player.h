@@ -17,6 +17,8 @@ namespace lazyEngine {
 		void mouseUp(const SDL_Event& eve);
 		void keyDown(const SDL_Event& eve);
 		void keyUp(const SDL_Event& eve);
+		void animate();
+		void stop();
 		~Player();
 
 		void tick();

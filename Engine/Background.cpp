@@ -14,7 +14,7 @@ namespace lazyEngine {
 
 		}
 		//texture = SDL_CreateTextureFromSurface(sys.getRen(), surface);
-		texture = SDL_CreateTextureFromSurface(sys.getRen(), surface);
+		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface);
 		// m�ste man g�ra en setTexture?
 		SDL_FreeSurface(surface);
 
@@ -23,7 +23,7 @@ namespace lazyEngine {
 
 	void Background::draw() {
 
-		SDL_RenderCopy(sys.getRen(), getTexture(), NULL, &getRect());
+		SDL_RenderCopy(sys.getRen(), getSheet1(), NULL, &getRect());
 		// NULL kan bytas ut mot vilken del av bilden som skall ritas ut
 
 	}
