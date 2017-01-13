@@ -20,24 +20,20 @@ namespace lazyEngine {
 
 
 	void GameEngine::remove(GameObject* o) {
-		for (auto c : gameObjectVector) {
-			if (c == o) {
-				// delete o;    this one would break the whole program, never use delete this way
-				break;
+		//for (int i = 0; i < gameObjectVector.size(); i++) {
+		//	if (gameObjectVector.at(i) == o)
+		//		gameObjectVector.erase(gameObjectVector.begin()+i);
+		//	}
 
-			}
+		// NÅgonting fel här som gör så att den failar builden
+		
 
 		}
 
-		// for (GameObject* pek=vek; pek < vek; pek++)
-		//		if( *pek == o){
-		//			delete o;
-		//			break;
-		//		}
+		
 
 
-
-	}
+	
 
 	void GameEngine::spawnEnemy()
 	{
