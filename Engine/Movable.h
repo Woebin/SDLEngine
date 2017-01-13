@@ -12,12 +12,11 @@ namespace lazyEngine {
 
 		~Movable();
 
-
 		void move(int xx, int yy);
 		virtual void animate() = 0;
 
 	protected:
-		Movable(const SDL_Rect& r, int s);
+		Movable(const SDL_Rect& r, int s, char * sheet1, char * sheet2, int sWidth, int sHeight);
 		// �kallar super i cpp
 		SDL_Texture* getSheet1() const { return spriteSheet1; }
 		SDL_Texture* getSheet2() const { return spriteSheet2; }

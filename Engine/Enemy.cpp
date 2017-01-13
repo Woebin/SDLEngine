@@ -9,26 +9,24 @@ using namespace std;
 namespace lazyEngine {
 
 
-	Enemy::Enemy(const SDL_Rect& r, int s) : Movable(r, s)
+	Enemy::Enemy(const SDL_Rect& r, int s, char * sheet1, char * sheet2, int sWidth, int sHeight) : Movable(r, s, sheet1, sheet2, sWidth, sHeight)
 	{
 		rCount = 0;
 		lCount = 0;
 		rSpriteX = 0;
 		rSpriteY = 384;
-		spriteWidth = 64;
-		spriteHeight = 64;
 		destroyed = false;
 
-		SDL_Surface* surface1 = IMG_Load("img/fireball.png");
+		SDL_Surface* surface1 = IMG_Load(sheet1);
 		if (surface1 == nullptr) {
-			cerr << "No image found." << endl;
+			cerr << "Image " << sheet1 << " not found." << endl;
 		}
 		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1);
 		SDL_FreeSurface(surface1);
 
-		SDL_Surface* surface2 = IMG_Load("img/explosion.png");
+		SDL_Surface* surface2 = IMG_Load(sheet2);
 		if (surface2 == nullptr) {
-			cerr << "No image found." << endl;
+			cerr << "Image " << sheet2 << " not found." << endl;
 		}
 		spriteSheet2 = SDL_CreateTextureFromSurface(sys.getRen(), surface2);
 		SDL_FreeSurface(surface2);

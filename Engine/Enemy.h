@@ -6,7 +6,7 @@ namespace lazyEngine {
 	class Enemy : public Movable
 	{
 	public:
-		Enemy(const SDL_Rect & r, int s);
+		Enemy(const SDL_Rect& r, int s, char * sheet1, char * sheet2, int sWidth, int sHeight);
 		void tick();
 		void animate();
 		void die();

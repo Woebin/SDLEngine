@@ -3,8 +3,10 @@
 
 namespace lazyEngine {
 
-	Movable::Movable(const SDL_Rect& r, int s) : GameObject(r), speed(s)
+	Movable::Movable(const SDL_Rect& r, int s, char * sheet1, char * sheet2, int sWidth, int sHeight) : GameObject(r), speed(s)
 	{
+		spriteWidth = sWidth;
+		spriteHeight = sHeight;
 	}
 
 	void Movable::move(int xx, int yy) {

@@ -9,7 +9,7 @@ namespace lazyEngine {
 
 		~Immovable();
 	protected:
-		Immovable(const SDL_Rect& r);
+		Immovable(const SDL_Rect& r, char * imgPath);
 
 	private:
 		// finns det n�got som �r speciellt f�r Immovable objekt?

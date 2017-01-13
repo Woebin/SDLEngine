@@ -11,22 +11,14 @@ int main(int argc, char** argv) {
 	SDL_Rect rp = { 200,200,39,39 };
 	SDL_Rect rb = { 0,0,640,480 };
 	SDL_Rect re = { 200,0,64,64 };
-	Player p(rp, 5);
-	Enemy e1(re, 2);
-	Background bg(rb);
+	Player p(rp, 5, "img/robojerk.png", "img/robojerkreverse.png", 38, 38);
+	Enemy e1(re, 2, "img/fireball.png", "img/explosion.png", 64, 64);
+	Background bg(rb, "img/bg.png");
 	ge.add(&bg);
 	ge.add(&p);
 	ge.add(&e1);
 	ge.run();
 
-	//Frame frame;
-	/*Label* lab = Label::getInstance({ 250,100,100,100 }, "0");
-	frame.add(lab);
-	Component* c1 = new MyButton({ 100,100,100,100 }, "Increase", lab);
-	frame.add(c1);
-	Component* c2 = new MyButton({ 400,100,100,100 }, "Decrease", lab);
-	frame.add(c2);*/
-	//frame.run();
 	return 0;
 }
 

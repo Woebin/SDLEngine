@@ -10,7 +10,8 @@ namespace lazyEngine {
 		public Movable
 	{
 	public:
-		Player(const SDL_Rect& r, int s);
+		//Player(const SDL_Rect& r, int s);
+		Player(const SDL_Rect & r, int s, char * sheet1, char * sheet2, int sWidth, int sHeight);
 		void draw();
 		SDL_Point getPos();
 		void mouseDown(const SDL_Event& eve);
