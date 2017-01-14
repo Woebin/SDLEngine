@@ -1,6 +1,6 @@
 
 #include "Player.h"
-#include "SpriteSheet.h"
+
 #include "System.h"
 #include <SDL_ttf.h>
 #include <SDL_image.h>
@@ -9,13 +9,16 @@ using namespace std;
 
 namespace lazyEngine {
 
-	Player::Player(const SDL_Rect& r, int s, SpriteSheet ss1, SpriteSheet ss2) : Movable(r, s, ss1, ss2)
+	Player::Player(const SDL_Rect& r, int s) : Movable(r, s)
 	{
-		SDL_Surface* surface1 = IMG_Load(ss1.getPath());
+		SDL_Surface* surface1 = IMG_Load("img/robojerk.png");
 		if (surface1 == nullptr) {
-			cerr << "No player spritesheet #1 image found." << endl;
+			cerr << "No image found." << endl;
+
 		}
 
+		spriteWidth = 38;
+		spriteHeight = 38;
 		rSpriteX = 0;
 		rSpriteY = 0;
 		rCount = 0;
@@ -28,9 +31,9 @@ namespace lazyEngine {
 		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1);
 
 		SDL_FreeSurface(surface1);
-		SDL_Surface* surface2 = IMG_Load(ss2.getPath());
+		SDL_Surface* surface2 = IMG_Load("img/robojerkreverse.png");
 		if (surface2 == nullptr) {
-			cerr << "No player spritesheet #2 image found." << endl;
+			cerr << "No image found." << endl;
 
 		}
 
@@ -54,12 +57,12 @@ namespace lazyEngine {
 		switch (eve.key.keysym.sym) {
 		case SDLK_RIGHT:
 			facingRight = true;
-			animate(1, 6);
+			animate();
 			move(speed, 0);
 			break;
 		case SDLK_LEFT:
 			facingRight = false;
-			animate(6, 1);
+			animate();
 			move(-speed, 0);
 			break;
 		case SDLK_UP: move(0, -speed); break;
@@ -73,17 +76,15 @@ namespace lazyEngine {
 		// gravity shit? slowing down?
 	}
 
-	void Player::animate(int start, int stop) {
-		int counter = start;
+	void Player::animate() {
 		if (facingRight) {
-			if (counter < stop) {
-				rSpriteX = sheet1.getSpriteCoords(counter).first;
-				rSpriteY = sheet1.getSpriteCoords(counter).second;
-				counter++;
+			rCount++;
+			if (rCount < 7) {
+				rSpriteX += spriteWidth;
 			}
 			else {
-				counter = start;
-				/*rSpriteX = 38;*/
+				rCount = 1;
+				rSpriteX = 38;
 			}
 		}
 		else {
@@ -111,11 +112,11 @@ namespace lazyEngine {
 
 	void Player::draw() {
 		if (facingRight) {
-			SDL_Rect rp = { rSpriteX, rSpriteY, sheet1.getSWidth(), sheet1.getSHeight() };
+			SDL_Rect rp = { rSpriteX,0,spriteWidth,spriteHeight };
 			SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
 		}
 		else {
-			SDL_Rect rp = { lSpriteX, 0, sheet2.getSWidth(), sheet2.getSHeight() };
+			SDL_Rect rp = { lSpriteX,0,spriteWidth,spriteHeight };
 			SDL_RenderCopy(sys.getRen(), getSheet2(), &rp, &getRect());
 		}
 		// NULL kan bytas ut mot vilken del av bilden som skall ritas ut

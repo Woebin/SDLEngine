@@ -1,13 +1,12 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 #include "Movable.h"
-#include "SpriteSheet.h"
 
 namespace lazyEngine {
 	class Enemy : public Movable
 	{
 	public:
-		Enemy(const SDL_Rect& r, int s, SpriteSheet sheet1, SpriteSheet sheet2);
+		Enemy(const SDL_Rect & r, int s);
 		void tick();
 		void animate();
 		void die();

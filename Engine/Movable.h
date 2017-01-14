@@ -1,7 +1,6 @@
 ﻿#ifndef MOVABLE_H
 #define MOVABLE_H
 #include "GameObject.h"
-#include "SpriteSheet.h"
 
 
 
@@ -13,18 +12,17 @@ namespace lazyEngine {
 
 		~Movable();
 
+
 		void move(int xx, int yy);
 		virtual void animate() = 0;
 
 	protected:
-		Movable(const SDL_Rect& r, int s, SpriteSheet ss1, SpriteSheet ss2);
+		Movable(const SDL_Rect& r, int s);
 		// �kallar super i cpp
 		SDL_Texture* getSheet1() const { return spriteSheet1; }
 		SDL_Texture* getSheet2() const { return spriteSheet2; }
 		SDL_Texture* spriteSheet1;
 		SDL_Texture* spriteSheet2;
-		SpriteSheet sheet1;
-		SpriteSheet sheet2;
 
 		int speed;
 		// Movable::Movable(const SDL_Rect& r, int s): GameObject(r), speed(s)

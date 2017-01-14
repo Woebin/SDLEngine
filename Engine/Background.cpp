@@ -6,11 +6,11 @@
 using namespace std;
 namespace lazyEngine {
 
-	Background::Background(const SDL_Rect& r, char * imgPath) : Immovable(r, imgPath)
+	Background::Background(const SDL_Rect& r) : Immovable(r)
 	{
-		SDL_Surface* surface = IMG_Load(imgPath);
+		SDL_Surface* surface = IMG_Load("img/bg.png");
 		if (surface == nullptr) {
-			cerr << "No background image found." << endl;
+			cerr << "Bild hittas inte!" << endl;
 
 		}
 		//texture = SDL_CreateTextureFromSurface(sys.getRen(), surface);
