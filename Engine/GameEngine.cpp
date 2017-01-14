@@ -20,10 +20,10 @@ namespace lazyEngine {
 
 
 	void GameEngine::remove(GameObject* o) {
-		//for (int i = 0; i < gameObjectVector.size(); i++) {
-		//	if (gameObjectVector.at(i) == o)
-		//		gameObjectVector.erase(gameObjectVector.begin()+i);
-		//	}
+		for (int i = 0; i < gameObjectVector.size(); i++) {
+			if (gameObjectVector.at(i) == o)
+				gameObjectVector.erase(gameObjectVector.begin()+i);
+			}
 
 		// NÅgonting fel här som gör så att den failar builden
 		
