@@ -38,11 +38,10 @@ namespace lazyEngine {
 	//void GameEngine::spawnEnemy()
 	//{
 
-	//	static int count;
+	//	
+	//	varv
 
-	//	count++;
-
-	//	if (count > 500) {
+	//	if (varv%100 == 0) {
 	//		srand((unsigned)time(0));
 	//		int x = (rand() % sys.SCREEN_WIDTH) + 1;
 
@@ -113,6 +112,7 @@ namespace lazyEngine {
 	void GameEngine::run() {
 		bool goOn = true;
 		while (goOn) {
+			// varv++;
 			Uint32 nextTick = SDL_GetTicks() + TIMEPERLOOP;
 			SDL_Event eve;
 			while (SDL_PollEvent(&eve)) {

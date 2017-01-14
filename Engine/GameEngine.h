@@ -26,7 +26,7 @@ namespace lazyEngine {
 	private:
 		std::vector<GameObject*> gameObjectVector;
 		int spawnTime = 5000; // hårdkodad, borde ändras till konstruktor argument
-
+		int varv = 0;
 	};
 
 }
