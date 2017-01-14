@@ -47,7 +47,7 @@ namespace lazyEngine {
 	//		int x = (rand() % sys.SCREEN_WIDTH) + 1;
 
 	//		SDL_Rect r = { x, sys.SCREEN_HEIGHT, 64, 64 };
-	//		Enemy enemy(r, 2); // kan succesivt öka speed om vi vill
+	//		Enemy enemy(r, 2, "img/fireball.png", "img/explosion.png", 64, 64); // kan succesivt öka speed om vi vill
 	//		gameObjectVector.push_back(&enemy);
 
 	//		count = 0;
@@ -137,15 +137,12 @@ namespace lazyEngine {
 					break;
 				} // switch
 			} // inner while
-
-
-
+			/*spawnEnemy();*/
 
 			SDL_SetRenderDrawColor(sys.getRen(), 255, 255, 255, 0);
 			SDL_RenderClear(sys.getRen());
 
-			// spawnEnemies
-			//spawnEnemy();
+			// spawn Enemies
 
 			for (GameObject* c : gameObjectVector) {
 				c->tick();
@@ -175,6 +172,9 @@ namespace lazyEngine {
 			}
 		} // outer while
 	}
+
+
+
 
 
 	GameEngine::~GameEngine()
