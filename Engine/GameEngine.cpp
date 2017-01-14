@@ -65,26 +65,22 @@ namespace lazyEngine {
 
 	bool GameEngine::checkCollision(SDL_Rect A, SDL_Rect B)
 	{
-		//The sides of the rectangles
-		int leftA, leftB;
-		int rightA, rightB;
-		int topA, topB;
-		int bottomA, bottomB;
 
 		//Calculate the sides of rect A
-		leftA = A.x;
-		rightA = A.x + A.w;
-		topA = A.y;
-		bottomA = A.y + A.h;
+		int leftA = A.x;
+		int rightA = A.x + A.w;
+		int topA = A.y;
+		int bottomA = A.y + A.h;
 
 		//Calculate the sides of rect B
-		leftB = B.x;
-		rightB = B.x + B.w;
-		topB = B.y;
-		bottomB = B.y + B.h;
+		int leftB = B.x;
+		int rightB = B.x + B.w;
+		int topB = B.y;
+		int bottomB = B.y + B.h;
 
 		//If any of the sides from A are outside of B
 		if (bottomA <= topB)
+		if (bottomA >= topB)
 		{
 			return false;
 		}
@@ -106,6 +102,10 @@ namespace lazyEngine {
 
 		//If none of the sides from A are outside B
 		return true;
+
+		// Below: a start at using SDL's built-in collision detection instead, ultimately not used.
+	/*	SDL_Rect result();*/
+		//SDL_bool coll = SDL_IntersectRect(A*, B*, result*);
 	}
 
 
@@ -137,12 +137,10 @@ namespace lazyEngine {
 					break;
 				} // switch
 			} // inner while
-			/*spawnEnemy();*/
 
 			SDL_SetRenderDrawColor(sys.getRen(), 255, 255, 255, 0);
 			SDL_RenderClear(sys.getRen());
 
-			// spawn Enemies
 
 			for (GameObject* c : gameObjectVector) {
 				c->tick();
@@ -159,7 +157,7 @@ namespace lazyEngine {
 								enemy->die();
 
 							} // if3
-						} // if2  -- collectebles?
+						} // if2  -- collectibles?
 					} // for
 				} // if1
 			} // original for-loop

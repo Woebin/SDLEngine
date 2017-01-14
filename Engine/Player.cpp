@@ -1,28 +1,21 @@
-
 #include "Player.h"
-
 #include "System.h"
+
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <iostream>
 using namespace std;
 
 namespace lazyEngine {
-
-	Player::Player(const SDL_Rect& r, int s, char * sheet1, char * sheet2, int sWidth, int sHeight) : Movable(r, s, sheet1, sheet2, sWidth, sHeight)
+	Player::Player(const SDL_Rect& r, int xSpd, int ySpd, char * sheet1, int sheet1X, int sheet1Y,
+		char * sheet2, int sheet2X, int sheet2Y, int sWidth, int sHeight, int rsx, int rsy, int lsx, int lsy, bool start1) :
+		Movable(r, xSpd, ySpd, sheet1, sheet1X, sheet1Y, sheet2, sheet2X, sheet2Y, sWidth, sHeight, rsx, rsy, lsx, lsy, start1)
 	{
 		SDL_Surface* surface1 = IMG_Load(sheet1);
 		if (surface1 == nullptr) {
-			cerr << "No player spritesheet #1 image found." << endl;
+			cerr << "Image " << sheet1 << " not found." << endl;
 		}
 
-		rSpriteX = 0;
-		rSpriteY = 0;
-		rCount = 0;
-		lSpriteX = 266;
-		lSpriteY = 0;
-		lCount = 0;
-		facingRight = true;
 		destroyed = false;
 
 		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1);
@@ -30,7 +23,7 @@ namespace lazyEngine {
 		SDL_FreeSurface(surface1);
 		SDL_Surface* surface2 = IMG_Load(sheet2);
 		if (surface2 == nullptr) {
-			cerr << "No player spritesheet #2 image found." << endl;
+			cerr << "Image " << sheet2 << " not found." << endl;
 
 		}
 
@@ -54,70 +47,76 @@ namespace lazyEngine {
 		switch (eve.key.keysym.sym) {
 		case SDLK_RIGHT:
 			facingRight = true;
-			animate();
-			move(speed, 0);
+			if (xSpeed > 0)
+				animate();
+			move(xSpeed, 0);
 			break;
 		case SDLK_LEFT:
 			facingRight = false;
-			animate();
-			move(-speed, 0);
+			if (xSpeed > 0)
+				animate();
+			move(-xSpeed, 0);
 			break;
-		case SDLK_UP: move(0, -speed); break;
-		case SDLK_DOWN: move(0, speed); break;
+		case SDLK_UP:
+			move(0, -ySpeed);
+			if (ySpeed > 0)
+				animate();
+			break;
+		case SDLK_DOWN:
+			move(0, ySpeed);
+			if (ySpeed > 0)
+				animate();
+			break;
 		}
 	}
 
 	void Player::keyUp(const SDL_Event & eve)
 	{
 		stop();
-		// gravity shit? slowing down?
 	}
 
 	void Player::animate() {
 		if (facingRight) {
-			rCount++;
-			if (rCount < 7) {
+			rCountX++;
+			if (rCountX < (spriteCount1X - 1)) {
 				rSpriteX += spriteWidth;
 			}
 			else {
-				rCount = 1;
-				rSpriteX = 38;
+				rCountX = 1;
+				rSpriteX = spriteWidth;
 			}
 		}
 		else {
-			lCount++;
-			if (lCount < 7)
+			lCountX++;
+			if (lCountX < (spriteCount2X - 1))
 				lSpriteX -= spriteWidth;
 			else {
-				lCount = 1;
-				lSpriteX = 228;
+				lCountX = 1;
+				lSpriteX = (initSLX - spriteWidth);
 			}
 		}
 	}
 
 	void Player::stop() {
-		rCount = 0;
-		lCount = 0;
-		rSpriteX = 0;
-		lSpriteX = 266;
-		rSpriteY = 0;
+		rCountX = 0;
+		lCountX = 0;
+		rSpriteX = initSRX;
+		lSpriteX = initSLX;
+		rSpriteY = initSRY;
 	}
 
 	void Player::die() {
-
 	}
 
 	void Player::draw() {
 		if (facingRight) {
-			SDL_Rect rp = { rSpriteX,0,spriteWidth,spriteHeight };
+			SDL_Rect rp = { rSpriteX, rSpriteY, spriteWidth, spriteHeight };
 			SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
 		}
 		else {
-			SDL_Rect rp = { lSpriteX,0,spriteWidth,spriteHeight };
+			SDL_Rect rp = { lSpriteX, lSpriteY, spriteWidth, spriteHeight };
 			SDL_RenderCopy(sys.getRen(), getSheet2(), &rp, &getRect());
 		}
-		// NULL kan bytas ut mot vilken del av bilden som skall ritas ut
-
 	}
 
 	SDL_Point Player::getPos() {
