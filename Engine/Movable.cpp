@@ -18,6 +18,8 @@ namespace lazyEngine {
 
 	Movable::~Movable()
 	{
+		SDL_DestroyTexture(spriteSheet1);
+		SDL_DestroyTexture(spriteSheet2);
 	}
 
 

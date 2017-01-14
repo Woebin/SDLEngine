@@ -14,6 +14,8 @@ namespace lazyEngine {
 
 	GameObject::~GameObject()
 	{
+	
+		SDL_DestroyTexture(texture);
 	}
 }
 

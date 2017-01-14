@@ -93,7 +93,6 @@ namespace lazyEngine {
 
 	Enemy::~Enemy()
 	{
-		SDL_DestroyTexture(getSheet1());
-		SDL_DestroyTexture(getSheet2());
+		
 	}
 }

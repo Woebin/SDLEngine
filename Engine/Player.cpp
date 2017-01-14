@@ -131,8 +131,7 @@ namespace lazyEngine {
 
 	Player::~Player()
 	{
-		SDL_DestroyTexture(getSheet1());
-		SDL_DestroyTexture(getSheet2());
+		
 	}
 
 	void Player::tick()
