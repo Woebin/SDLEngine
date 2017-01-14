@@ -25,7 +25,7 @@ namespace lazyEngine {
 		facingRight = true;
 		destroyed = false;
 
-		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1);
+		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1); 
 
 		SDL_FreeSurface(surface1);
 		SDL_Surface* surface2 = IMG_Load(sheet2);
