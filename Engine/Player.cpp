@@ -9,13 +9,16 @@ using namespace std;
 
 namespace lazyEngine {
 
-	Player::Player(const SDL_Rect& r, int s, char * sheet1, char * sheet2, int sWidth, int sHeight) : Movable(r, s, sheet1, sheet2, sWidth, sHeight)
+	Player::Player(const SDL_Rect& r, int s) : Movable(r, s)
 	{
-		SDL_Surface* surface1 = IMG_Load(sheet1);
+		SDL_Surface* surface1 = IMG_Load("img/robojerk.png");
 		if (surface1 == nullptr) {
-			cerr << "No player spritesheet #1 image found." << endl;
+			cerr << "No image found." << endl;
+
 		}
 
+		spriteWidth = 38;
+		spriteHeight = 38;
 		rSpriteX = 0;
 		rSpriteY = 0;
 		rCount = 0;
@@ -28,9 +31,9 @@ namespace lazyEngine {
 		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1); 
 
 		SDL_FreeSurface(surface1);
-		SDL_Surface* surface2 = IMG_Load(sheet2);
+		SDL_Surface* surface2 = IMG_Load("img/robojerkreverse.png");
 		if (surface2 == nullptr) {
-			cerr << "No player spritesheet #2 image found." << endl;
+			cerr << "No image found." << endl;
 
 		}
 

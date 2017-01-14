@@ -8,7 +8,7 @@ namespace lazyEngine {
 		public Immovable
 	{
 	public:
-		Background(const SDL_Rect& r, char * imgPath);
+		Background(const SDL_Rect& r);
 		void draw();
 
 		~Background();

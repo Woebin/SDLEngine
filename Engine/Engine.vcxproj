@@ -27,6 +27,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="System.h" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +39,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="System.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
