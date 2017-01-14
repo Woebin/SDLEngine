@@ -14,7 +14,7 @@ namespace lazyEngine {
 		~Movable();
 
 		void move(int xx, int yy);
-		virtual void animate() = 0;
+		virtual void animate(int start, int stop) = 0;
 
 	protected:
 		Movable(const SDL_Rect& r, int s, SpriteSheet ss1, SpriteSheet ss2);

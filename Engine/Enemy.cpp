@@ -40,13 +40,13 @@ namespace lazyEngine {
 		//if (getRect().y < 480) {
 		//	
 		//}
-		animate();
+	/*	animate();*/
 		move(0, speed);
 
 		// nu åker eldkloten neråt i jämn hastighet
 	}
 
-	void Enemy::animate() {
+	void Enemy::animate(int start, int stop) {
 		if (!destroyed) {
 			rCount++;
 			if (rCount < 8) {

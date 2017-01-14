@@ -54,10 +54,15 @@ namespace lazyEngine {
 		switch (eve.key.keysym.sym) {
 		case SDLK_RIGHT:
 			facingRight = true;
+
+			rCount = 1;
+			moving = true;
 			animate(1, 6);
 			move(speed, 0);
+			cout << "Right: " << moving << endl;
 			break;
 		case SDLK_LEFT:
+			cout << "Left: " << moving << endl;
 			facingRight = false;
 			animate(6, 1);
 			move(-speed, 0);
@@ -69,20 +74,21 @@ namespace lazyEngine {
 
 	void Player::keyUp(const SDL_Event & eve)
 	{
+		moving = false;
 		stop();
 		// gravity shit? slowing down?
 	}
 
 	void Player::animate(int start, int stop) {
-		int counter = start;
-		if (facingRight) {
-			if (counter < stop) {
-				rSpriteX = sheet1.getSpriteCoords(counter).first;
-				rSpriteY = sheet1.getSpriteCoords(counter).second;
-				counter++;
+		if (facingRight && moving) {
+			if (rCount < stop) {
+				rSpriteX = sheet1.getSpriteCoords(rCount).first;
+				cout << sheet1.getSpriteCoords(rCount).first;
+				rSpriteY = sheet1.getSpriteCoords(rCount).second;
+				rCount++;
 			}
 			else {
-				counter = start;
+				rCount = start;
 				/*rSpriteX = 38;*/
 			}
 		}
@@ -95,6 +101,10 @@ namespace lazyEngine {
 				lSpriteX = 228;
 			}
 		}
+		//for (int i = start; i < stop; i++) {
+		//	rSpriteX = sheet1.getSpriteCoords(i).first;
+		//	rSpriteY = sheet1.getSpriteCoords(i).second;
+		//}
 	}
 
 	void Player::stop() {

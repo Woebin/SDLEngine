@@ -20,6 +20,7 @@ namespace lazyEngine {
 		void keyDown(const SDL_Event& eve);
 		void keyUp(const SDL_Event& eve);
 		void animate(int start, int stop);
+		bool moving = false;
 		void stop();
 		void die();
 		~Player();
