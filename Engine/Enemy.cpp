@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "System.h"
+#include "SpriteSheet.h"
 #include <SDL_image.h>
 #include <iostream>
 
@@ -9,7 +10,7 @@ using namespace std;
 namespace lazyEngine {
 
 
-	Enemy::Enemy(const SDL_Rect& r, int s, char * sheet1, char * sheet2, int sWidth, int sHeight) : Movable(r, s, sheet1, sheet2, sWidth, sHeight)
+	Enemy::Enemy(const SDL_Rect& r, int s, SpriteSheet ss1, SpriteSheet ss2) : Movable(r, s, ss1, ss2)
 	{
 		rCount = 0;
 		lCount = 0;
@@ -17,16 +18,16 @@ namespace lazyEngine {
 		rSpriteY = 384;
 		destroyed = false;
 
-		SDL_Surface* surface1 = IMG_Load(sheet1);
+		SDL_Surface* surface1 = IMG_Load(ss1.getPath());
 		if (surface1 == nullptr) {
-			cerr << "Image " << sheet1 << " not found." << endl;
+			cerr << "Image " << ss1.getPath() << " not found." << endl;
 		}
 		spriteSheet1 = SDL_CreateTextureFromSurface(sys.getRen(), surface1);
 		SDL_FreeSurface(surface1);
 
-		SDL_Surface* surface2 = IMG_Load(sheet2);
+		SDL_Surface* surface2 = IMG_Load(ss2.getPath());
 		if (surface2 == nullptr) {
-			cerr << "Image " << sheet2 << " not found." << endl;
+			cerr << "Image " << ss2.getPath() << " not found." << endl;
 		}
 		spriteSheet2 = SDL_CreateTextureFromSurface(sys.getRen(), surface2);
 		SDL_FreeSurface(surface2);
@@ -80,12 +81,12 @@ namespace lazyEngine {
 	}
 
 	void Enemy::draw() {
-		if (!destroyed){
-		SDL_Rect rp = { rSpriteX,rSpriteY,spriteWidth,spriteHeight };
-		SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
+		if (!destroyed) {
+			SDL_Rect rp = { rSpriteX,rSpriteY,sheet1.getSWidth(),sheet1.getSHeight() };
+			SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
 		}
 		else {
-			SDL_Rect rp = { rSpriteX,rSpriteY,spriteWidth,spriteHeight };
+			SDL_Rect rp = { rSpriteX,rSpriteY,sheet2.getSWidth(),sheet2.getSHeight() };
 			SDL_RenderCopy(sys.getRen(), getSheet2(), &rp, &getRect());
 		}
 	}
