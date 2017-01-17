@@ -9,12 +9,11 @@ using namespace std;
 namespace lazyEngine {
 
 
-	Enemy::Enemy(const SDL_Rect& r, int s, char * sheet1, char * sheet2, int sWidth, int sHeight) : Movable(r, s, sheet1, sheet2, sWidth, sHeight)
+	Enemy::Enemy(const SDL_Rect& r, int xSpd, int ySpd, char * sheet1, int sheet1X, int sheet1Y,
+		char * sheet2, int sheet2X, int sheet2Y, int sWidth, int sHeight, int rsx, int rsy, int lsx, int lsy, bool start1) :
+		Movable(r, xSpd, ySpd, sheet1, sheet1X, sheet1Y, sheet2, sheet2X, sheet2Y, sWidth, sHeight, rsx, rsy, lsx, lsy, start1)
 	{
-		rCount = 0;
-		lCount = 0;
-		rSpriteX = 0;
-		rSpriteY = 384;
+
 		destroyed = false;
 
 		SDL_Surface* surface1 = IMG_Load(sheet1);
@@ -39,35 +38,46 @@ namespace lazyEngine {
 		//if (getRect().y < 480) {
 		//	
 		//}
-		animate();
-		move(0, speed);
 
-		// nu åker eldkloten neråt i jämn hastighet
+		animate();
+		move(xSpeed, ySpeed);
 	}
 
 	void Enemy::animate() {
 		if (!destroyed) {
-			rCount++;
-			if (rCount < 8) {
-				rSpriteX += spriteWidth;
+			if (facingRight) {
+				rCountX++;
+				if (rCountX < spriteCount1X) {
+					rSpriteX += spriteWidth;
+				}
+				else {
+					rCountX = 0;
+					rSpriteX = initSRX;
+				}
 			}
 			else {
-				rCount = 0;
-				rSpriteX = 0;
+				lCountX++;
+				if (lCountX < (spriteCount2X - 1))
+					lSpriteX -= spriteWidth;
+				else {
+					lCountX = 1;
+					lSpriteX = (initSLX - spriteWidth);
+				}
 			}
 		}
 		else {
-			lCount++;
-			if (lCount < 5) {
+			lCountX++;
+			if (lCountX < spriteCount2X) {
 				rSpriteX += spriteWidth;
 			}
-			else if (lCount < 6 && rSpriteY < 256) {
-				lCount = 0;
-				rSpriteX = 0;
+			//else if (lCountX < (spriteCount2X - 1) && rSpriteY < 256) {
+			else if (lCountX < (spriteCount2X - 1) && lCountY < (spriteCount2Y -1)) {
+				lCountX = 0;
+				rSpriteX = initSRX;
 				rSpriteY += spriteHeight;
 			}
 			else {
-				lCount = 0;
+				lCountX = 0;
 				rSpriteX = 0;
 				rSpriteY = 0;
 			}
@@ -76,13 +86,14 @@ namespace lazyEngine {
 
 	void Enemy::die() {
 		destroyed = true;
-		speed = 0;
+		ySpeed = 0;
+		xSpeed = 0;
 	}
 
 	void Enemy::draw() {
-		if (!destroyed){
-		SDL_Rect rp = { rSpriteX,rSpriteY,spriteWidth,spriteHeight };
-		SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
+		if (!destroyed) {
+			SDL_Rect rp = { rSpriteX,rSpriteY,spriteWidth,spriteHeight };
+			SDL_RenderCopy(sys.getRen(), getSheet1(), &rp, &getRect());
 		}
 		else {
 			SDL_Rect rp = { rSpriteX,rSpriteY,spriteWidth,spriteHeight };
